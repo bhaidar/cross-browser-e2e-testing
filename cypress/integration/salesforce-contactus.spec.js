@@ -21,7 +21,7 @@ context('Applitools', () => {
         cy.eyesClose();
     })
 
-    it('search for visual grid', () => {
+    it('fill the contact us form', () => {
 
         // Wait on the page to load
         cy.location('pathname', { timeout: 10000 })
@@ -45,27 +45,15 @@ context('Applitools', () => {
             .type('Senior Manager')
             .should('have.value', 'Senior Manager');
 
-        // Fill a wrong email address
+        // Fill a email address
         cy.get('input[id="reg_form_1-UserEmail"]')
-            .type('john.smith2gmail.com')
-            .should('have.value', 'john.smith2gmail.com');
+            .type('john.smith@gmail.com')
+            .should('have.value', 'john.smith@gmail.com');
 
         // Fill a Phone number
         cy.get('input[id="reg_form_1-UserPhone"]')
             .type('+1-202-555-0176')
             .should('have.value', '+1-202-555-0176');
-
-        // Error msg for Email should now be shown
-        cy.get('#reg_form_1-UserEmail-errorMsg').should('be.visible', true);
-
-        // Take a snapshot of the contact form with email error message shown
-        cy.eyesCheckWindow('Contact Form with Email error message');
-
-        // Fill a valid email address
-        cy.get('input[id="reg_form_1-UserEmail"]')
-            .clear()
-            .type('john.smith@gmail.com')
-            .should('have.value', 'john.smith@gmail.com');
 
         // Fill a Company Name
         cy.get('input[id="reg_form_1-CompanyName"]')
@@ -74,28 +62,31 @@ context('Applitools', () => {
 
         // Select number of employees
         cy.get('select[id="reg_form_1-CompanyEmployees"]')
-            .select('1 - 10 employees')
+            .select('3')
             .should('have.value', '3');
 
         // Select Country
         cy.get('select[id="reg_form_1-CompanyCountry"]')
-            .select('United States')
+            .select('US')
             .should('have.value', 'US');
 
         // Select State
         cy.get('select[id="reg_form_1-CompanyState"]')
-            .select('Arizona')
+            .select('AZ')
             .should('have.value', 'AZ');
 
         // Select Product/Interest
         cy.get('select[id="reg_form_1-Lead.Primary_Product_Interest__c"]')
-            .select('Salesforce automation & CRM')
+            .select('Sales')
             .should('have.value', 'Sales');
 
         // Fill the User Description
         cy.get('textarea[id="reg_form_1-UserDescription"]')
             .type('I am requesting a demo!')
             .should('have.value', 'I am requesting a demo!');
+
+        // Take a snapshot before submitting the form
+        cy.eyesCheckWindow('Contact Form before submitting');
 
         // Submit the form
         cy.get('button[name="Submit"]').click();
