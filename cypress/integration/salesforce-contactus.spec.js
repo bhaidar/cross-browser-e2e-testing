@@ -27,6 +27,9 @@ context('Applitools', () => {
         cy.location('pathname', { timeout: 10000 })
             .should('include', '/contactme');
 
+        cy.get('button[id="onetrust-accept-btn-handler"]', { timeout: 10000 })
+            .click();
+
         // Take a snapshot of the contact form
         cy.eyesCheckWindow('Contact Form');
 
@@ -83,7 +86,10 @@ context('Applitools', () => {
         // Fill the User Description
         cy.get('textarea[id="reg_form_1-UserDescription"]')
             .type('I am requesting a demo!')
+            .blur()
             .should('have.value', 'I am requesting a demo!');
+
+        // cy.wait(500);
 
         // Take a snapshot before submitting the form
         cy.eyesCheckWindow('Contact Form before submitting');
