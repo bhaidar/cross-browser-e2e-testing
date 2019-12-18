@@ -17,6 +17,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
+      - run: "export APPLITOOLS_BATCH_ID=`echo $CIRCLE_SHA1`"
       - run: # run tests
           name: Run Cypress/Applitools tests
           command: npm run cy:run -- --spec "cypress/integration/salesforce-contactus.spec.js"
