@@ -27,8 +27,8 @@ context('Applitools', () => {
         cy.location('pathname', { timeout: 10000 })
             .should('include', '/contactme');
 
-        cy.get('button[id="onetrust-accept-btn-handler"]', { timeout: 10000 })
-            .click();
+        // cy.get('button[id="onetrust-accept-btn-handler"]', { timeout: 10000 })
+        //     .click();
 
         // Take a snapshot of the contact form
         cy.eyesCheckWindow('Contact Form');
